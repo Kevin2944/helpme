@@ -1,15 +1,26 @@
+let idCounter = 1;
+
 class Ticket {
-    constructor(id, author, creation_date, title, description, state) {
-        this.id = id,
-        this.author = author,
-        this.creation_date = creation_date,
-        this.title = title,
-        this.description = description,
-        this.state = state
+    constructor(author, title, description) {
+        if (!author || author.trim === "") throw new Error("Auteur obligatoire");
+        if (!title || title.length > 50) throw new Error("Le titre est obligatoire (50 caractères max)");
+        if (!description || description.length > 2000) throw new Error("Description obligatoire (2000 caractères max)");
+
+        this.id = idCounter++;
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.creation_date = this.getFormattedDate();
+        this.state = "ouvert";
     }
 
     getDisplayTicket() {
         return `id: ${this.id}, auteur: ${this.author}, date: ${this.creation_date}, titre: ${this.title}, description: ${this.description}, état: ${this.state}`;
+    }
+
+    getFormattedDate() {
+        const now = new Date();
+        return now.toLocaleString("fr-FR");
     }
 }
 

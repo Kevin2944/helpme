@@ -1,12 +1,56 @@
-body {
-  background-color: white;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 body {
-  padding: 50px;
+  background-color: white;
+  padding: 70px 50px 100px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* margin-bottom: 50px; */
+}
+
+nav {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  /* justify-content: center; */
+}
+
+nav ul {
+  display: flex;
+  gap: 10px;
+}
+
+nav ul li {
+  list-style: none;
 }
 
 a {
   color: #00B7FF;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-list li {
+  list-style: none;
+}
+
+footer {
+  /* background-color: #f1f1f1; */
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
 }

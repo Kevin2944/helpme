@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Help Me</title>
+        <link rel="stylesheet" href="/stylesheets/style.css">
+    </head>
+    <body>
+        <%- include('partials/fragment_header')  %>
+
+        <main>
+            <% if(tickets.length == 0) { %>
+                <p>Aucun ticket pour l'instant</p>
+            <% } else { %>
+                <div>
+                    <% tickets.forEach(ticket => { %>
+                        <ul class="ticket-list">
+                            <li><strong><%= ticket.title %></strong></li>
+                            <li>id : <%= ticket.id %></li>
+                            <li>date de création : <%= ticket.creation_date %></li>
+                            <li>author : <%= ticket.author %></li>
+                            <li>description : <%= ticket.description %></li>
+                        </ul>
+                    <% }) %>
+                </div>      
+            <% } %>            
+        </main>
+
+        <%- include('partials/fragment_footer')  %>
+    </body>
+</html>
