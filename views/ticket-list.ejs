@@ -13,15 +13,17 @@
             <% if(tickets.length == 0) { %>
                 <p>Aucun ticket pour l'instant</p>
             <% } else { %>
-                <div>
+                <div class="ticket-list-container">
                     <% tickets.forEach(ticket => { %>
-                        <ul class="ticket-list">
-                            <li><strong><%= ticket.title %></strong></li>
-                            <li>id : <%= ticket.id %></li>
-                            <li>date de création : <%= ticket.creation_date %></li>
-                            <li>author : <%= ticket.author %></li>
-                            <li>description : <%= ticket.description %></li>
-                        </ul>
+                        <a href="/ticket/ticket-detail/<%= ticket.id %>">
+                            <ul class="ticket-list">
+                                <li><strong><%= ticket.title %></strong></li>
+                                <li>id : <%= ticket.id %></li>
+                                <li>date de création : <%= ticket.creation_date %></li>
+                                <li>author : <%= ticket.author %></li>
+                                <li>description : <%= ticket.description %></li>
+                            </ul>
+                        </a>
                     <% }) %>
                 </div>      
             <% } %>            
