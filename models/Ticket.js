@@ -10,6 +10,7 @@ class Ticket {
         this.author = author;
         this.title = title;
         this.description = description;
+        this.answers = [];
         this.creation_date = this.getFormattedDate();
         this.state = "ouvert";
         this.authorId = authorId;

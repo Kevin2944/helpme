@@ -25,10 +25,38 @@
                     <li>date de création : <%= ticket.creation_date %></li>
                     <li>author : <%= ticket.author %></li>
                     <li>description : <%= ticket.description %></li>
+                    <% if (ticket.answers.length > 0) {
+                        ticket.answers.forEach(answer => { %>
+                            <li><span>Autheur : <%= answer.authorName %></span> - <span>Réponse : <%= answer.answer %></span></li>
+                        <% });
+                    } %>
+                    <li>
+                        <% if (user) { %>
+                        <button type="button" id="show-form">Ajouter une réponse</button>
+                        <% } %>
+                    </li>
                 </ul>
+
+                <form action="/ticket/<%= ticket.id %>/add-answer" method="post" id="answer-form" style="display: none;">
+                    <label for="answer">Réponse</label>
+                    <input type="text" name="answer" id="answer">
+                    <button type="submit">Valider</button>
+                </form>
             <% } %>
         </main>
 
         <%- include('partials/fragment_footer')  %>
+
+        <script>
+            document.getElementById('show-form').addEventListener('click', () => {
+                const form = document.getElementById('answer-form');
+                
+                if (form.style.display === "none") {
+                    form.style.removeProperty("display");
+                } else {
+                    form.style.display("none");
+                }
+            });
+        </script>
     </body>
 </html>

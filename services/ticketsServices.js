@@ -1,4 +1,5 @@
 const Ticket = require('../models/Ticket');
+const Answer = require('../models/Answer');
 const { getDb } = require('../database/db');
 
 async function addTicket(author, title, description, authorId) {
@@ -29,9 +30,21 @@ async function deleteById(id) {
     await db.collection('tickets').deleteOne({ id });
 }
 
+async function addAnswer(ticketId, answer, authorName, authorId) {
+    const db = getDb();
+
+    const ans = new Answer(answer, authorName, authorId);
+
+    await db.collection('tickets').updateOne(
+        { id: ticketId},
+        { $push : { answers: ans } }
+    );
+}
+
 module.exports = {
     addTicket,
     getAllTickets,
     findById,
-    deleteById
+    deleteById,
+    addAnswer
 };

@@ -42,4 +42,15 @@ router.get("/delete/:id", (req, res) => {
     res.redirect("/ticket");
 });
 
+router.post("/:id/add-answer", (req, res) => {
+    const ticketId = req.params.id;
+    const answer = req.body.answer;
+    const authorName = req.session.user.name;
+    const authorId = req.session.user.id;
+
+    ticketService.addAnswer(ticketId, answer, authorName, authorId);
+
+    res.redirect("/ticket");
+});
+
 module.exports = router;
