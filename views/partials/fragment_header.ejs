@@ -13,6 +13,7 @@
                 <li><a href="/auth/login">Se connecter</a></li>
             <% } %>
             <% if (user) { %>
+                <li><a href="/user/delete/<%= user.id %>">Supprimer mon compte</a></li>
                 <li><a href="/auth/logout">Se deconnecter</a></li>
             <% } %>  
         </ul>

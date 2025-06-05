@@ -1,25 +1,48 @@
 const User = require('../models/User');
+const { getDb } = require('../database/db');
 
-const users = [
-    new User("z@eni.fr", "Marc", "z", 1),
-    new User("a@eni.fr", "Jean", "a", 1),
-    new User("formateur", "formateur", "formateur", 2)
-];
+async function findByUsernameAndPassword(username, password) {
+    const db = getDb();
 
-function findByUsernameAndPassword(username, password) {
-    return users.find(u => u.username === username && u.password === password);
+    const user = await db.collection('users').findOne({ username, password });
+
+    return user;
 }
 
-function findByUsername(username) {
-    return users.find(u => u.username === username);
+async function findByUsername(username) {
+    const db = getDb();
+
+    const user = await db.collection('users').findOne({ username });
+
+    return user;
 }
 
-function findById(id) {
-    return users.find(u => u.id === id);
+async function findById(id) {
+    const db = getDb();
+
+    const user = await db.collection('users').findOne({ id });
+
+    return user;
+}
+
+async function createUser(username, name, password) {
+    const db = getDb();
+
+    const user = new User(username, name, password);
+
+    await db.collection('users').insertOne(user);
+}
+
+async function deleteUser(id) {
+    const db = getDb();
+
+    await db.collection('users').deleteOne({ id });
 }
 
 module.exports = {
     findByUsernameAndPassword,
     findByUsername,
-    findById
+    findById,
+    createUser,
+    deleteUser
 }

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const ticketService = require('../services/ticketsServices');
 
-router.get(["/", "/tickets"], (req, res) => {
-    const allTickets = ticketService.getAllTickets();
+router.get(["/", "/tickets"], async (req, res) => {
+    const allTickets = await ticketService.getAllTickets();
 
     res.render("ticket-list", { tickets: allTickets });
 });
@@ -19,7 +19,7 @@ router.get("/add-ticket", (req, res) => {
 });
 
 router.post("/add-ticket", (req, res) => {
-    const author = req.session.user.username;
+    const author = req.session.user.name;
     const title = req.body.title;
     const description = req.body.description;
     const authorId = req.session.user.id;
@@ -29,8 +29,8 @@ router.post("/add-ticket", (req, res) => {
     res.redirect("/ticket");
 });
 
-router.get("/ticket-detail/:id", (req, res) => {
-    const ticket = ticketService.findById(req.params.id);
+router.get("/ticket-detail/:id", async (req, res) => {
+    const ticket = await ticketService.findById(req.params.id);
 
     res.render("ticket-detail", { ticket: ticket });
 });

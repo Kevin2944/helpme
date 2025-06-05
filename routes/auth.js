@@ -6,9 +6,9 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    const user = userService.findByUsernameAndPassword(username, password);
+    const user = await userService.findByUsernameAndPassword(username, password);
     const error = "Identifiants de connexion invalides"
 
     if (!user) return res.render('custom-errors', { errorLogin: error });

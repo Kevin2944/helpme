@@ -1,4 +1,4 @@
-let idCounter = 1;
+const { v4: uuidv4 } = require('uuid');
 
 class Ticket {
     constructor(author, title, description, authorId) {
@@ -6,7 +6,7 @@ class Ticket {
         if (!title || title.length > 50) throw new Error("Le titre est obligatoire (50 caractères max)");
         if (!description || description.length > 2000) throw new Error("Description obligatoire (2000 caractères max)");
 
-        this.id = idCounter++;
+        this.id = uuidv4();
         this.author = author;
         this.title = title;
         this.description = description;
